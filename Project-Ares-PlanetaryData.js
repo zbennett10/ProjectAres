@@ -1,4 +1,4 @@
-[
+var planetaryData = [
   {"planets": [
     " ",
     " MERCURY ",
@@ -272,4 +272,4 @@
     "Yes",
     "Unknown"
   ]}
-]
+];
