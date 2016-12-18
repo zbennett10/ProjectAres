@@ -11,17 +11,22 @@
           table, td{
             border: 2px solid black;
           }
+
+          table {
+            margin-bottom: 20px;
+          }
           
 
           
         </style>
-
+        
+        <script src="mostValuableAsteroids.js"></script>
         <script src="Project-Ares-PlanetaryData.js" ></script>
     </head>
 
     <body>
         <header>
-          <h1>Planetary Data</h1>
+          <h1>Our Solar System</h1>
         </header>
 
         <div id="hours"></div>
@@ -30,9 +35,11 @@
         <button id="start"></button>
         <button id="stop"></button>
 
-        <table id="planetTable">
+        <h3>Planetary Data</h3>
+        <table id="planetTable"></table>
 
-        </table>
+        <h3>Most Profitable Asteroids</h3>
+        <table id="asteroidTable"></table>
 
         <footer>
           Data used from <a href="http://nssdc.gsfc.nasa.gov/planetary/factsheet/">NASA</a>
@@ -90,7 +97,26 @@
         });
 
        
+  //-----------------------------------------Asteroid Stuff
+        const asteroidTable = document.querySelector('#asteroidTable');
+        
+        
+          for(prop in asteroidData[0]) {
+            var header = document.createElement('th');
+            header.innerHTML = prop;
+            asteroidTable.appendChild(header);
+          }
 
+          asteroidData.forEach(object => {
+            var row = document.createElement('tr');
+            asteroidTable.appendChild(row);
+
+            for(prop in object) {
+              var item = document.createElement('td');
+              item.innerHTML = object[prop];
+              asteroidTable.appendChild(item);
+            }
+          });
         
         </script>
     </body>
