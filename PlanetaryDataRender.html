@@ -15,6 +15,10 @@
           table {
             margin-bottom: 20px;
           }
+
+          .chart div{
+            background-color:red;
+          }
           
 
           
@@ -22,6 +26,7 @@
         
         <script src="mostValuableAsteroids.js"></script>
         <script src="Project-Ares-PlanetaryData.js" ></script>
+        <script src="https://d3js.org/d3.v4.min.js"></script>
     </head>
 
     <body>
@@ -37,6 +42,11 @@
 
         <h3>Planetary Data</h3>
         <table id="planetTable"></table>
+
+        <h3>Planetary Charts</h3>
+        <div class="chart">
+
+        </div>
 
         <h3>Most Profitable Asteroids</h3>
         <table id="asteroidTable"></table>
@@ -117,6 +127,28 @@
               asteroidTable.appendChild(item);
             }
           });
+
+
+          //--------------------------------------planet charts
+          var planetRows = document.querySelectorAll('#planetTable tr');
+          var massData = [];
+          planetRows[1].childNodes.forEach(mass => {
+           massData.push(mass.innerText);
+          });
+          massData.shift();
+
+          var x = d3.scaleLinear()
+                      .domain([0, d3.max(massData)])
+                      .range([0, 420]);
+
+          var chartDivs = d3.select('.chart').selectAll('div')
+            .data(massData).enter().append('div')
+            .style('width', function(d) {return x(d) + "px"})
+            .style('background-color', function(d) {
+              if(massData.indexOf(d) % 2 === 0) return "cadetblue";
+              return "goldenrod";
+            })
+            .text(function(d) {return d;});
         
         </script>
     </body>
